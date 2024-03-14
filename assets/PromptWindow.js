@@ -3,7 +3,7 @@
 const i18n = {
 	prompt__save: 'Zapisz',
 	prompt__cancel: 'Anuluj',
-	prompt__close_confirm: 'Czy na pewno chcesz anulować? Oprócz komentarza gadżet zmienia status lnDNU. Jeśli anulujesz, to dodaj ręcznie parametry lnDNU.',
+	prompt__close_confirm: 'Czy potwierdzasz anulowanie zmiany zgłoszenia? \n\nOprócz dodania komentarza, gadżet zmienia status szablonu lnDNU w zgłoszeniu. Jeśli nie dodasz komentarza przez gadżet, to dodaj ręcznie parametry lnDNU.',
 };
 
 /**
