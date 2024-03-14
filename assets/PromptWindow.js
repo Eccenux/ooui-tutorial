@@ -56,6 +56,7 @@ export class PromptWindow {
 
 	/** @private Action: cancel (async, non-blocking).*/
 	actionCancel(dialog, action) {
+		// BUG: https://phabricator.wikimedia.org/T360085
 		// OO.ui.confirm(i18n.prompt__close_confirm).then(( confirmed ) => {
 		// 	console.log('[PromptWindow]', {confirmed});
 		// 	if (confirmed) {
