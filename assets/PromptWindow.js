@@ -54,6 +54,30 @@ export class PromptWindow {
 		this.windowManager.updateWindowSize(this.dialogInternal);
 	}
 
+	/** @private Action: cancel (async, non-blocking).*/
+	actionCancel(dialog, action) {
+		OO.ui.confirm(i18n.prompt__close_confirm).then(( confirmed ) => {
+			console.log('[PromptWindow]', {confirmed});
+			if (confirmed) {
+				dialog.close( { action: action } );
+			}
+		});
+	}
+
+	/** @private Action: save (async, blocking).*/
+	actionSave(dialog, action) {
+		return new Promise((resolve, reject) => {
+			setTimeout(()=>{
+				if ( action == 'save') {
+					resolve();
+					dialog.close( { action: action } );
+				} else {
+					reject();
+				}
+			}, 2000);
+		})
+	}
+
 	/** @private init OO boilerplate.*/
 	init(value) {
 		const me = this;
@@ -104,21 +128,12 @@ export class PromptWindow {
 
 		DialogInternal.prototype.getActionProcess = function ( action ) {
 			var dialog = this;
-			// if ( action == 'cancel') {
-			// 	return OO.ui.prompt(i18n.prompt__close_confirm);
-			// }
-			if ( action ) {
-				console.log('[PromptWindow]', action);
-				return new OO.ui.Process( new Promise((resolve, reject) => {
-					setTimeout(()=>{
-						if ( action == 'save') {
-							resolve();
-							dialog.close( { action: action } );
-						} else {
-							reject();
-						}
-					}, 2000);
-				}) );
+			console.log('[PromptWindow]', action);
+			if ( action == 'cancel') {
+				me.actionCancel(dialog, action);
+			}
+			else if ( action ) {
+				return new OO.ui.Process( me.actionSave(dialog, action) );
 			}
 			return DialogInternal.super.prototype.getActionProcess.call( this, action );
 		};		
