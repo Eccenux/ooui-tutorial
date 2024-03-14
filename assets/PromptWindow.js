@@ -56,12 +56,15 @@ export class PromptWindow {
 
 	/** @private Action: cancel (async, non-blocking).*/
 	actionCancel(dialog, action) {
-		OO.ui.confirm(i18n.prompt__close_confirm).then(( confirmed ) => {
-			console.log('[PromptWindow]', {confirmed});
-			if (confirmed) {
-				dialog.close( { action: action } );
-			}
-		});
+		// OO.ui.confirm(i18n.prompt__close_confirm).then(( confirmed ) => {
+		// 	console.log('[PromptWindow]', {confirmed});
+		// 	if (confirmed) {
+		// 		dialog.close( { action: action } );
+		// 	}
+		// });
+		if (confirm(i18n.prompt__close_confirm)) {
+			dialog.close( { action: action } );
+		}
 	}
 
 	/** @private Action: save (async, blocking).*/
